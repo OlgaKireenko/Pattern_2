@@ -34,7 +34,7 @@ public class DataGenerator {
 
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto("vasya", "password", "active")) // передаём в теле объект, который будет преобразован в JSON
+                .body(new RegistrationDto(user.getLogin(), user.getPassword(), user.status)) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
@@ -74,8 +74,11 @@ public class DataGenerator {
 
         public static RegistrationDto getRegisteredUser(String status) {
 
-            val registeredUser = getUser("active");
+            val registeredUser = getUser(status);
+
+
             sendRequest(registeredUser);
+
 
             // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
             // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)

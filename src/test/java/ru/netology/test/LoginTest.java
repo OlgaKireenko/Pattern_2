@@ -32,7 +32,8 @@ class AuthTest {
         $("[data-test-id=login] input").setValue(registeredUser.getLogin());
         $("[data-test-id=password] input").setValue(registeredUser.getPassword());
         $("[data-test-id=action-login]").click();
-       // $("[data-test-id=code] input").shouldBe(visible, Duration.ofSeconds(15));
+
+        $(byText("Личный кабинет")).shouldBe(visible, Duration.ofSeconds(15));
 
 
 
@@ -51,7 +52,6 @@ class AuthTest {
         $(".notification__content").shouldBe(visible, Duration.ofSeconds(15));
 
 
-
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет
         //  незарегистрированного пользователя, для заполнения полей формы используйте пользователя notRegisteredUser
     }
@@ -64,6 +64,9 @@ class AuthTest {
         $("[data-test-id=login] input").setValue(blockedUser.getLogin());
         $("[data-test-id=password] input").setValue(blockedUser.getPassword());
         $("[data-test-id=action-login]").click();
+        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
+
+
 
 
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет,
@@ -79,6 +82,9 @@ class AuthTest {
         $("[data-test-id=password] input").setValue(registeredUser.getPassword());
         $("[data-test-id=action-login]").click();
 
+        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
+
+
 
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
         //  логином, для заполнения поля формы "Логин" используйте переменную wrongLogin,
@@ -93,6 +99,8 @@ class AuthTest {
         $("[data-test-id=login] input").setValue(registeredUser.getLogin());
         $("[data-test-id=password] input").setValue(wrongPassword);
         $("[data-test-id=action-login]").click();
+
+        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
 
 
         // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
