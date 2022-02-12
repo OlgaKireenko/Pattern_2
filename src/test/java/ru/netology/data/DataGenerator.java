@@ -16,7 +16,6 @@ import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
 
-
 public class DataGenerator {
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
@@ -41,22 +40,15 @@ public class DataGenerator {
                 .statusCode(200); // код 200 OK
     }
 
-        // TODO: отправить запрос на указанный в требованиях path, передав в body запроса объект user
-        //  и не забудьте передать подготовленную спецификацию requestSpec.
-        //  Пример реализации метода показан в условии к задаче.
-
 
     public static String getRandomLogin() {
         String login = faker.name().username();
-        // TODO: добавить логику для объявления переменной login и задания её значения, для генерации
-        //  случайного логина используйте faker
         return login;
     }
 
     public static String getRandomPassword() {
         String password = faker.number().digits(5);
-        // TODO: добавить логику для объявления переменной password и задания её значения, для генерации
-        //  случайного пароля используйте faker
+
         return password;
     }
 
@@ -65,26 +57,19 @@ public class DataGenerator {
         }
 
         public static RegistrationDto getUser(String status) {
-            val user = new RegistrationDto(getRandomLogin(),getRandomPassword(),status);
+            val user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
             return user;
-
-            // TODO: создать пользователя user используя методы getRandomLogin(), getRandomPassword() и параметр status
-            //return user;
         }
 
         public static RegistrationDto getRegisteredUser(String status) {
 
             val registeredUser = getUser(status);
 
-
             sendRequest(registeredUser);
-
-
-            // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
-            // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
             return registeredUser;
         }
     }
+
     @Value
     public static class RegistrationDto {
         String login;

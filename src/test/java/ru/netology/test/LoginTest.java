@@ -17,7 +17,7 @@ import static ru.netology.data.DataGenerator.getRandomLogin;
 import static ru.netology.data.DataGenerator.getRandomPassword;
 import static com.codeborne.selenide.Selectors.*;
 
-class AuthTest {
+class LoginTest {
 
     @BeforeEach
     void setup() {
@@ -35,11 +35,6 @@ class AuthTest {
 
         $(byText("Личный кабинет")).shouldBe(visible, Duration.ofSeconds(15));
 
-
-
-        // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
-        //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте
-        //  пользователя registeredUser
     }
 
     @Test
@@ -50,10 +45,6 @@ class AuthTest {
         $("[data-test-id=password] input").setValue(notRegisteredUser.getPassword());
         $("[data-test-id=action-login]").click();
         $(".notification__content").shouldBe(visible, Duration.ofSeconds(15));
-
-
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет
-        //  незарегистрированного пользователя, для заполнения полей формы используйте пользователя notRegisteredUser
     }
 
     @Test
@@ -66,11 +57,6 @@ class AuthTest {
         $("[data-test-id=action-login]").click();
         $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
 
-
-
-
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет,
-        //  заблокированного пользователя, для заполнения полей формы используйте пользователя blockedUser
     }
 
     @Test
@@ -84,11 +70,6 @@ class AuthTest {
 
         $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
 
-
-
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
-        //  логином, для заполнения поля формы "Логин" используйте переменную wrongLogin,
-        //  "Пароль" - пользователя registeredUser
     }
 
     @Test
@@ -99,13 +80,8 @@ class AuthTest {
         $("[data-test-id=login] input").setValue(registeredUser.getLogin());
         $("[data-test-id=password] input").setValue(wrongPassword);
         $("[data-test-id=action-login]").click();
-
         $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
 
-
-        // TODO: добавить логику теста в рамках которого будет выполнена попытка входа в личный кабинет с неверным
-        //  паролем, для заполнения поля формы "Логин" используйте пользователя registeredUser,
-        //  "Пароль" - переменную wrongPassword
     }
 }
 
