@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.data.DataGenerator.Registration.getRegisteredUser;
@@ -44,7 +44,8 @@ class LoginTest {
         $("[data-test-id=login] input").setValue(notRegisteredUser.getLogin());
         $("[data-test-id=password] input").setValue(notRegisteredUser.getPassword());
         $("[data-test-id=action-login]").click();
-        $(".notification__content").shouldBe(visible, Duration.ofSeconds(15));
+        $(".notification__content").shouldHave(text("Неверно указан логин или пароль"));
+        //$(".notification__content").shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Test
@@ -55,7 +56,7 @@ class LoginTest {
         $("[data-test-id=login] input").setValue(blockedUser.getLogin());
         $("[data-test-id=password] input").setValue(blockedUser.getPassword());
         $("[data-test-id=action-login]").click();
-        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
+        $(".notification__content").shouldHave(text("Пользователь заблокирован"));
 
     }
 
@@ -68,7 +69,7 @@ class LoginTest {
         $("[data-test-id=password] input").setValue(registeredUser.getPassword());
         $("[data-test-id=action-login]").click();
 
-        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
+        $(".notification__content").shouldHave(text("Неверно указан логин или пароль"));
 
     }
 
@@ -80,7 +81,7 @@ class LoginTest {
         $("[data-test-id=login] input").setValue(registeredUser.getLogin());
         $("[data-test-id=password] input").setValue(wrongPassword);
         $("[data-test-id=action-login]").click();
-        $(".notification__icon").shouldBe(visible, Duration.ofSeconds(10));
+        $(".notification__content").shouldHave(text("Неверно указан логин или пароль"));
 
     }
 }
